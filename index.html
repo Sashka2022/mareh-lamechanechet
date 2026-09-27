@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מראה למחנכת</title>
+<meta name="description" content="כלי אבחון עצמי למחנכות כיתה: מציג 6-10 פרקטיקות נבחרות בכל אחד משישה תחומי עבודה, ובסיום מצייר תמונת חוזקות אישית.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --blue:#0048FF;
+    --blue-deep:#3B5DEC;
+    --blue-mid:#2680F1;
+    --sky:#0DB4F4;
+    --teal:#41CAC5;
+    --violet:#6536EA;
+
+    --white:#FEFEFE;
+    --bg-soft:#F3F6FF;
+    --bg-mute:#E9EEFC;
+    --ink:#0B1440;
+    --ink-mute:#4A5580;
+    --ink-soft:#8390B2;
+    --line:#DCE3F5;
+
+    --fg1:var(--ink);
+    --fg2:var(--ink-mute);
+    --fg3:var(--ink-soft);
+    --bg1:var(--white);
+    --bg2:var(--bg-soft);
+    --bg3:var(--bg-mute);
+    --border:var(--line);
+
+    --shadow-sm:0 1px 2px rgba(11,20,64,0.06);
+    --shadow-md:0 8px 24px -10px rgba(11,20,64,0.18);
+    --shadow-lg:0 24px 60px -20px rgba(11,20,64,0.25);
+    --shadow-brand:0 18px 44px -18px rgba(0,72,255,0.4);
+
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --fg1:#F3F6FF;
+      --fg2:#B9C3E8;
+      --fg3:#8390B2;
+      --bg1:#0B1440;
+      --bg2:#101B54;
+      --bg3:#16215E;
+      --border:#293368;
+      --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md:0 8px 24px -10px rgba(0,0,0,0.5);
+      --shadow-lg:0 24px 60px -20px rgba(0,0,0,0.6);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --fg1:#F3F6FF;
+    --fg2:#B9C3E8;
+    --fg3:#8390B2;
+    --bg1:#0B1440;
+    --bg2:#101B54;
+    --bg3:#16215E;
+    --border:#293368;
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md:0 8px 24px -10px rgba(0,0,0,0.5);
+    --shadow-lg:0 24px 60px -20px rgba(0,0,0,0.6);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg2);
+    color:var(--fg1);
+    font-family:'Heebo','Assistant',system-ui,sans-serif;
+    direction:rtl;
+    padding-inline:16px;
+    padding-block:24px;
+    -webkit-font-smoothing:antialiased;
+    text-wrap:pretty;
+  }
+  h1,h2,h3,h4{ font-family:'Heebo',sans-serif; text-wrap:balance; margin:0; }
+  p{ margin:0; }
+  button{ font-family:inherit; }
+  .num{ font-variant-numeric: tabular-nums; direction:ltr; unicode-bidi:isolate; }
+
+  .wrap{ max-width:760px; margin-inline:auto; }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; margin-bottom:20px;
+  }
+  .brandmark{ display:flex; align-items:center; gap:10px; }
+  .brandmark img{ height:26px; width:auto; display:block; }
+  .brandmark .tagline{ font-size:12px; color:var(--fg3); font-weight:500; }
+  .overall-progress{
+    flex:1; max-width:220px; height:6px; border-radius:99px;
+    background:var(--border); overflow:hidden;
+  }
+  .overall-progress > i{
+    display:block; height:100%; border-radius:99px;
+    background:linear-gradient(90deg,#41CAC5,#0DB4F4,#2680F1,#3B5DEC,#6536EA,#0048FF);
+    transition:width .4s cubic-bezier(.22,1,.36,1);
+  }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--bg1); border:1px solid var(--border); border-radius:24px;
+    box-shadow:var(--shadow-md); padding:28px 24px;
+  }
+  @media (min-width:560px){ .card{ padding:36px 40px; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; color:var(--blue); margin-bottom:10px;
+  }
+  .eyebrow::before{
+    content:""; width:7px; height:7px; border-radius:99px; background:var(--blue);
+  }
+
+  h1.title{ font-size:clamp(30px,5vw,42px); font-weight:900; color:var(--fg1); line-height:1.15; margin-bottom:14px; }
+  .lede{ font-size:18px; color:var(--fg2); line-height:1.6; margin-bottom:18px; }
+  .body-text{ font-size:15.5px; color:var(--fg2); line-height:1.7; }
+  .body-text + .body-text{ margin-top:12px; }
+
+  /* ---------- intro domain chips ---------- */
+  .domain-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:22px 0 6px;
+  }
+  @media (max-width:480px){ .domain-grid{ grid-template-columns:1fr; } }
+  .domain-chip{
+    display:flex; align-items:center; gap:10px; padding:12px 14px;
+    background:var(--bg2); border:1px solid var(--border); border-radius:14px;
+  }
+  .dot{ width:12px; height:12px; border-radius:99px; flex:none; }
+  .domain-chip .name{ font-size:14px; font-weight:700; color:var(--fg1); line-height:1.3; }
+  .domain-chip .count{ font-size:12px; color:var(--fg3); }
+
+  .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .btn{
+    appearance:none; border:none; cursor:pointer; border-radius:12px;
+    font-weight:700; font-size:15.5px; padding:14px 26px;
+    transition:transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s, background .18s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--blue); color:#fff; box-shadow:var(--shadow-brand); }
+  .btn-primary:hover{ background:#0040e6; }
+  .btn-ghost{ background:transparent; color:var(--blue); border:1px solid var(--border); }
+  .btn-ghost:hover{ background:var(--bg2); }
+  .btn:disabled{ opacity:.4; cursor:not-allowed; }
+  .hint{ font-size:13px; color:var(--fg3); margin-top:10px; }
+
+  /* ---------- assessment ---------- */
+  .domain-dots{ display:flex; justify-content:center; gap:10px; margin-bottom:22px; }
+  .domain-dots button{
+    appearance:none; border:none; background:none; cursor:pointer; padding:6px;
+  }
+  .domain-dots .pip{
+    width:10px; height:10px; border-radius:99px; background:var(--border);
+    display:block; transition:all .25s cubic-bezier(.22,1,.36,1);
+  }
+  .domain-dots .pip.done{ background:var(--dc,var(--blue)); }
+  .domain-dots .pip.current{ width:26px; background:var(--dc,var(--blue)); }
+
+  .domain-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .domain-head .dot{ width:16px; height:16px; }
+  .domain-head h2{ font-size:clamp(22px,3vw,28px); font-weight:800; color:var(--fg1); }
+  .domain-sub{ font-size:14px; color:var(--fg3); margin-bottom:6px; }
+  .encourage{ font-size:14.5px; color:var(--blue); font-weight:600; margin-bottom:20px; min-height:20px; }
+
+  .scale-legend{
+    display:flex; justify-content:space-between; gap:6px; font-size:11.5px; color:var(--fg3);
+    padding:10px 4px; border-bottom:1px dashed var(--border); margin-bottom:8px;
+  }
+  .scale-legend span{ flex:1; text-align:center; }
+
+  .practice-row{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:18px 4px; border-bottom:1px solid var(--border);
+  }
+  .practice-row:last-child{ border-bottom:none; }
+  .practice-main{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+  .practice-text{ font-size:15.5px; font-weight:500; color:var(--fg1); line-height:1.45; }
+
+  .rating{ display:flex; gap:6px; flex:none; }
+  .rating button{
+    appearance:none; cursor:pointer; width:34px; height:34px; border-radius:99px;
+    border:1.5px solid var(--border); background:var(--bg1); color:var(--fg2);
+    font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;
+    transition:all .15s cubic-bezier(.22,1,.36,1);
+  }
+  .rating button:hover{ border-color:var(--dc,var(--blue)); }
+  .rating button.active{ background:var(--dc,var(--blue)); border-color:var(--dc,var(--blue)); color:#fff; transform:scale(1.06); }
+
+  @media (max-width:480px){
+    .practice-row{ flex-direction:column; align-items:stretch; gap:10px; }
+    .rating{ justify-content:space-between; }
+    .rating button{ width:15%; height:34px; }
+  }
+
+  .assess-nav{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    margin-top:24px;
+  }
+  .domain-progress-txt{ font-size:13px; color:var(--fg3); }
+
+  /* ---------- results ---------- */
+  .stat-row{ display:flex; gap:14px; flex-wrap:wrap; margin:18px 0 26px; }
+  .stat{
+    flex:1; min-width:130px; background:var(--bg2); border:1px solid var(--border);
+    border-radius:16px; padding:16px 18px;
+  }
+  .stat b{ display:block; font-size:26px; font-weight:900; color:var(--blue); }
+  .stat span{ font-size:12.5px; color:var(--fg3); }
+
+  .chart-card{ display:flex; justify-content:center; padding:12px 0 4px; }
+  .chart-card svg{ max-width:100%; height:auto; }
+
+  .highlight-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+  @media (max-width:560px){ .highlight-grid{ grid-template-columns:1fr; } }
+  .highlight{
+    border-radius:18px; padding:20px; border:1px solid var(--border);
+  }
+  .highlight.strength{ background:linear-gradient(160deg, rgba(65,202,197,.14), rgba(0,72,255,.06)); }
+  .highlight.growth{ background:linear-gradient(160deg, rgba(101,54,234,.12), rgba(0,72,255,.05)); }
+  .highlight h4{ font-size:15px; font-weight:800; margin-bottom:10px; color:var(--fg1); }
+  .highlight ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .highlight li{ font-size:13.5px; color:var(--fg2); line-height:1.5; display:flex; gap:8px; }
+  .highlight li .dot{ margin-top:6px; }
+
+  .domain-card{
+    border:1px solid var(--border); border-radius:16px; padding:16px 18px; margin-bottom:12px;
+  }
+  .domain-card-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+  .domain-card-name{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:14.5px; color:var(--fg1); }
+  .domain-card-score{ font-weight:800; font-size:15px; color:var(--fg1); }
+  .bar-track{ height:8px; border-radius:99px; background:var(--bg3); overflow:hidden; margin-bottom:8px; }
+  .bar-fill{ height:100%; border-radius:99px; transition:width .5s cubic-bezier(.22,1,.36,1); }
+  .domain-card-note{ font-size:13px; color:var(--fg2); }
+
+  .results-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+  .footnote{ font-size:12.5px; color:var(--fg3); line-height:1.7; margin-top:28px; text-align:center; }
+
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="brandmark">
+      <img src="hotam-logo.png" alt="חותם - אחריות לחינוך בישראל">
+    </div>
+    <div class="overall-progress" id="topProgress" aria-hidden="true"><i style="width:0%"></i></div>
+  </div>
+
+  <!-- ================= INTRO ================= -->
+  <section id="view-intro" class="card">
+    <div class="eyebrow">כלי אבחון עצמי למחנכת כיתה</div>
+    <h1 class="title">מראה למחנכת</h1>
+    <p class="lede">כמה דקות של עצירה - לראות מה כבר יציב ומוצק בעבודה שלך ככיתה, ומה כדאי לטפח הלאה.</p>
+    <p class="body-text">בכל אחד משישה תחומי העבודה של מחנכת כיתה נבחרו הפרקטיקות המרכזיות ביותר מתוך מאגר רחב, כדי שהמענה יישאר ממוקד. לכל פרקטיקה מדרגים מ-1 עד 5, באיזו מידה היא מתקיימת אצלך בפועל. בסיום מתקבלת תמונה אישית של החוזקות והכיוונים לצמיחה.</p>
+
+    <div class="domain-grid" id="introDomainGrid"></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="btnStart">בואי נתחיל</button>
+      <button class="btn btn-ghost" id="btnResume" hidden>המשך מאיפה שהפסקתי</button>
+    </div>
+    <p class="hint" id="introHint">לוקח בערך 10-12 דקות. אפשר לעצור באמצע - מה שכבר סימנת נשמר בדפדפן הזה.</p>
+  </section>
+
+  <!-- ================= ASSESSMENT ================= -->
+  <section id="view-assess" class="card" hidden>
+    <div class="domain-dots" id="domainDots"></div>
+
+    <div class="domain-head">
+      <span class="dot" id="assessDot"></span>
+      <h2 id="assessTitle"></h2>
+    </div>
+    <div class="domain-sub" id="assessSub"></div>
+    <div class="encourage" id="assessEncourage"></div>
+
+    <div class="scale-legend">
+      <span>1 · כלל לא</span>
+      <span>2 · לעיתים רחוקות</span>
+      <span>3 · במידה בינונית</span>
+      <span>4 · במידה רבה</span>
+      <span>5 · באופן קבוע</span>
+    </div>
+
+    <div id="practiceList"></div>
+
+    <div class="assess-nav">
+      <button class="btn btn-ghost" id="btnBack">הקודם</button>
+      <span class="domain-progress-txt" id="domainProgressTxt"></span>
+      <button class="btn btn-primary" id="btnNext">הבא</button>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section id="view-results" class="card" hidden>
+    <div class="eyebrow">התוצאה שלך</div>
+    <h1 class="title" style="font-size:clamp(26px,4.5vw,36px)">התמונה שלך ככיתה</h1>
+    <p class="lede">כך נראית, לפי מה שסימנת, המפה של ששת תחומי העבודה שלך.</p>
+
+    <div class="stat-row" id="statRow"></div>
+
+    <div class="chart-card">
+      <svg id="radar" width="340" height="360" viewBox="0 0 340 360"></svg>
+    </div>
+
+    <div class="highlight-grid">
+      <div class="highlight strength">
+        <h4>נקודות חוזק בולטות</h4>
+        <ul id="strengthList"></ul>
+      </div>
+      <div class="highlight growth">
+        <h4>כיוונים לצמיחה</h4>
+        <ul id="growthList"></ul>
+      </div>
+    </div>
+
+    <div id="domainCards"></div>
+
+    <div class="results-actions">
+      <button class="btn btn-ghost" id="btnCopy">העתקת סיכום</button>
+      <button class="btn btn-ghost" id="btnRestart">התחלה מחדש</button>
+    </div>
+    <p class="hint" id="restartHint" hidden>לחיצה נוספת תמחק את התשובות שלך ותתחיל שאלון חדש. בטוחה?</p>
+
+    <p class="footnote">רשימת הפרקטיקות מבוססת על קטלוג הפרקטיקות של מחנכות כיתה בחינוך היסודי, מבית קרן משפחת ליאון (lionff.com). התמונה שמצטיירת כאן היא נקודת פתיחה לשיחה עם עצמך - לא ציון ולא בחינה.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DOMAINS = [
+    { id:1, name:"ראייה ותכלול הוליסטי של הילד", short:"ראייה הוליסטית", color:"#41CAC5",
+      practices:[
+        {id:6,  t:"שיחות אישיות עם כל ילד וילדה"},
+        {id:8,  t:"מפגש פתיחת יום אישי"},
+        {id:13, t:"שיתוף אישי הדדי בין המחנכת לתלמידים"},
+        {id:17, t:"מחברת קשר אישית מקרבת"},
+        {id:20, t:"מתן אפשרות לתלמידים לתת משוב למחנכת"},
+        {id:23, t:"מיפוי צרכים לימודיים ורגשיים של כל ילד"},
+        {id:25, t:"שיח שוטף עם מורים מקצועיים על התלמיד"},
+        {id:33, t:"הערכה דיאלוגית, לא רק ציון"},
+        {id:37, t:"משוב תגובתי, מיידי וממוקד"},
+        {id:40, t:"הנכחת הדברים הטובים בכל ילד"}
+      ]},
+    { id:2, name:"חינוך הוגן, שוויון הזדמנויות ומיצוי פוטנציאל", short:"חינוך הוגן ומיצוי פוטנציאל", color:"#0DB4F4",
+      practices:[
+        {id:51, t:"תוכניות אישיות מותאמות לתלמידים"},
+        {id:53, t:"ארגון מרחב הכיתה ללמידה עצמאית"},
+        {id:57, t:"למידה מבוססת פרויקטים (PBL)"},
+        {id:59, t:"מענים מותאמים גם לתלמידים מצטיינים"},
+        {id:65, t:"סדר קבוע על הלוח לניהול יום הלמידה"},
+        {id:69, t:"פיתוח אחריות ועצמאות בלמידה אצל הילדים"},
+        {id:75, t:"איתור חוזקות ותחומי עניין של כל תלמיד"},
+        {id:77, t:"תפקיד קבוע לכל ילד בכיתה"},
+        {id:80, t:"שיתוף הורים בקבלת החלטות על הילד"},
+        {id:83, t:"קירוב וחיזוק הורים למעורבות"}
+      ]},
+    { id:3, name:"חינוך לערכים והכיתה כקבוצה חברתית", short:"ערכים וקהילה כיתתית", color:"#2680F1",
+      practices:[
+        {id:96,  t:"משחקים כחלק משגרת היום"},
+        {id:99,  t:"יצירת הזדמנויות למילים טובות בין תלמידים"},
+        {id:101, t:"מפגשי חינוך אישי בקבוצות קטנות"},
+        {id:104, t:"יצירת תחושת גאווה כיתתית"},
+        {id:111, t:"שיתוף התלמידים בהחלטות חברתיות"},
+        {id:120, t:"למידה סביב ערך מוביל"},
+        {id:124, t:"עיבוד מצבים חברתיים בעזרת ועדת כיתה"},
+        {id:132, t:"הנכחת מורשות ושפות שונות בכיתה"},
+        {id:135, t:"היכרות עם מוגבלויות ושונות"},
+        {id:141, t:"פרויקטים למעורבות חברתית וקהילתית"}
+      ]},
+    { id:4, name:"עבודה עם שותפי תפקיד", short:"שותפי תפקיד", color:"#3B5DEC",
+      practices:[
+        {id:154, t:"שיח שוטף ותיאום עם מורות מקצועיות"},
+        {id:155, t:"תיווך ויצירת קשר טוב בין מורה מקצועית לילד"},
+        {id:156, t:"ישיבות צוות סדירות"},
+        {id:157, t:"שיתוף ועבודה שוטפת עם יועצת בית הספר"},
+        {id:158, t:"שיתוף מורים מקצועיים בפעילויות הכיתה"},
+        {id:159, t:"הוראה משותפת עם הצוות המקצועי"}
+      ]},
+    { id:5, name:"קשר עם ההורים", short:"קשר עם הורים", color:"#6536EA",
+      practices:[
+        {id:166, t:"עדכון שוטף להורי הכיתה"},
+        {id:168, t:"עדכון הורים על היבטים חיוביים בילד"},
+        {id:169, t:"מפגשים אישיים כאמצעי ליצירת קשר חיובי"},
+        {id:170, t:"קשר יזום וממוקד כשעולה קושי"},
+        {id:171, t:"מחברת קשר עם ההורים"},
+        {id:173, t:"תפקיד ברור ותוכנית עבודה לוועד הורים כיתתי"},
+        {id:174, t:"הזדמנויות להשתתפות הורים בפעילויות הכיתה"},
+        {id:175, t:"הורים כמלמדים אורחים בכיתה"},
+        {id:176, t:"שיתוף ועדכון הורים גם בלמידה מרחוק"}
+      ]},
+    { id:6, name:"ניהול עצמי, שימור עצמי ומניעת שחיקה", short:"ניהול עצמי ומניעת שחיקה", color:"#0048FF",
+      practices:[
+        {id:178, t:"גבולות ושעות עבודה מוגדרות וידועות"},
+        {id:180, t:"תכנון חודשי ושבועי מסודר"},
+        {id:181, t:"פיתוח קבלה עצמית, אורך רוח וביטחון"},
+        {id:182, t:"גמישות ושחרור מהצורך להיות מושלמת"},
+        {id:183, t:"טיפוח הרגלי טיפול עצמי"},
+        {id:185, t:"בניית עבודת צוות טובה עם קולגות"},
+        {id:187, t:"פנייה לעזרה ותמיכה ממנהלת ויועצת"},
+        {id:188, t:"יכולת ניתוק רגשי והתמודדות מקצועית"},
+        {id:189, t:"זכירה שלא הכל באחריותה"},
+        {id:191, t:"חיפוש המניע שמאחורי התנהגות הילד"}
+      ]}
+  ];
+
+  var ENCOURAGE = [
+    "מתחילים בנחת - אין תשובות נכונות או לא נכונות.",
+    "תחום שני מתוך שישה. יופי של התקדמות.",
+    "חצי הדרך כבר מאחורייך.",
+    "עוד קצת. את/ה בקצב טוב.",
+    "כמעט הגעת. שני תחומים אחרונים.",
+    "התחום האחרון. כל הכבוד על ההשקעה."
+  ];
+
+  var SCALE_LABEL = {1:"כלל לא",2:"לעיתים רחוקות",3:"במידה בינונית",4:"במידה רבה",5:"באופן קבוע"};
+
+  var TOTAL = DOMAINS.reduce(function(n,d){ return n + d.practices.length; }, 0);
+  var STORAGE_KEY = "hotamMirrorV1";
+
+  var state = loadState();
+
+  function defaultState(){
+    return { stage:"intro", domainIndex:0, answers:{} };
+  }
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      if(!parsed || typeof parsed !== "object") return defaultState();
+      return {
+        stage: parsed.stage === "results" ? "results" : "assess-ready",
+        domainIndex: typeof parsed.domainIndex === "number" ? parsed.domainIndex : 0,
+        answers: parsed.answers && typeof parsed.answers === "object" ? parsed.answers : {}
+      };
+    }catch(e){ return defaultState(); }
+  }
+
+  function saveState(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+    try{ window.claude && window.claude.hot && window.claude.hot.snapshot && window.claude.hot.snapshot(state); }catch(e){}
+  }
+
+  function answeredCount(){
+    return Object.keys(state.answers).length;
+  }
+
+  function domainAnswered(domain){
+    return domain.practices.filter(function(p){ return state.answers[p.id] != null; }).length;
+  }
+
+  function domainAvg(domain){
+    var vals = domain.practices.map(function(p){ return state.answers[p.id]; }).filter(function(v){ return v != null; });
+    if(!vals.length) return null;
+    return vals.reduce(function(a,b){ return a+b; },0) / vals.length;
+  }
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(html != null) e.innerHTML = html;
+    return e;
+  }
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];
+    });
+  }
+
+  /* ---------------- views ---------------- */
+  var viewIntro = document.getElementById("view-intro");
+  var viewAssess = document.getElementById("view-assess");
+  var viewResults = document.getElementById("view-results");
+
+  function showView(name){
+    viewIntro.hidden = name !== "intro";
+    viewAssess.hidden = name !== "assess";
+    viewResults.hidden = name !== "results";
+    window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+    updateTopProgress();
+  }
+
+  function updateTopProgress(){
+    var bar = document.querySelector("#topProgress > i");
+    var pct = Math.round((answeredCount() / TOTAL) * 100);
+    bar.style.width = pct + "%";
+  }
+
+  /* ---------------- intro ---------------- */
+  function renderIntro(){
+    var grid = document.getElementById("introDomainGrid");
+    grid.innerHTML = "";
+    DOMAINS.forEach(function(d){
+      var chip = el("div","domain-chip");
+      chip.innerHTML =
+        '<span class="dot" style="background:'+d.color+'"></span>' +
+        '<span><span class="name">'+esc(d.short)+'</span><br>' +
+        '<span class="count">'+d.practices.length+' פרקטיקות</span></span>';
+      grid.appendChild(chip);
+    });
+
+    var hasProgress = answeredCount() > 0;
+    document.getElementById("btnResume").hidden = !hasProgress;
+    document.getElementById("introHint").textContent = hasProgress
+      ? "יש לך התקדמות שמורה (" + answeredCount() + " מתוך " + TOTAL + "). אפשר להמשיך או להתחיל שאלון חדש."
+      : "לוקח בערך 10-12 דקות. אפשר לעצור באמצע - מה שכבר סימנת נשמר בדפדפן הזה.";
+  }
+
+  document.getElementById("btnStart").addEventListener("click", function(){
+    state.answers = {};
+    state.domainIndex = 0;
+    state.stage = "assess";
+    saveState();
+    showView("assess");
+    renderAssess();
+  });
+  document.getElementById("btnResume").addEventListener("click", function(){
+    state.stage = "assess";
+    showView("assess");
+    renderAssess();
+  });
+
+  /* ---------------- assessment ---------------- */
+  function renderDots(){
+    var wrap = document.getElementById("domainDots");
+    wrap.innerHTML = "";
+    DOMAINS.forEach(function(d, i){
+      var btn = el("button");
+      btn.type = "button";
+      btn.title = d.short;
+      var pip = el("span","pip");
+      pip.style.setProperty("--dc", d.color);
+      if(i === state.domainIndex) pip.classList.add("current");
+      else if(domainAnswered(d) === d.practices.length) pip.classList.add("done");
+      btn.appendChild(pip);
+      btn.addEventListener("click", function(){
+        state.domainIndex = i;
+        renderAssess();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderAssess(){
+    renderDots();
+    var domain = DOMAINS[state.domainIndex];
+
+    document.getElementById("assessDot").style.background = domain.color;
+    document.getElementById("assessTitle").textContent = domain.name;
+    document.getElementById("assessSub").textContent = "תחום " + (state.domainIndex+1) + " מתוך " + DOMAINS.length + " · " + domain.practices.length + " פרקטיקות";
+    document.getElementById("assessEncourage").textContent = ENCOURAGE[state.domainIndex] || "";
+
+    var list = document.getElementById("practiceList");
+    list.innerHTML = "";
+    domain.practices.forEach(function(p){
+      var row = el("div","practice-row");
+      var main = el("div","practice-main");
+      main.innerHTML = '<span class="practice-text">'+esc(p.t)+'</span>';
+      row.appendChild(main);
+
+      var rating = el("div","rating");
+      rating.style.setProperty("--dc", domain.color);
+      [1,2,3,4,5].forEach(function(n){
+        var b = el("button", null, n);
+        b.type = "button";
+        b.setAttribute("aria-label", "דירוג " + n + " - " + SCALE_LABEL[n]);
+        if(state.answers[p.id] === n) b.classList.add("active");
+        b.addEventListener("click", function(){
+          state.answers[p.id] = n;
+          saveState();
+          renderAssess();
+        });
+        rating.appendChild(b);
+      });
+      row.appendChild(rating);
+      list.appendChild(row);
+    });
+
+    document.getElementById("domainProgressTxt").textContent =
+      domainAnswered(domain) + " מתוך " + domain.practices.length + " בתחום זה";
+
+    document.getElementById("btnBack").disabled = state.domainIndex === 0;
+    document.getElementById("btnNext").textContent =
+      state.domainIndex === DOMAINS.length - 1 ? "סיום - צפייה בתמונה שלי" : "הבא";
+
+    updateTopProgress();
+    saveState();
+  }
+
+  document.getElementById("btnBack").addEventListener("click", function(){
+    if(state.domainIndex > 0){ state.domainIndex--; renderAssess(); }
+  });
+  document.getElementById("btnNext").addEventListener("click", function(){
+    if(state.domainIndex < DOMAINS.length - 1){
+      state.domainIndex++;
+      renderAssess();
+    } else {
+      state.stage = "results";
+      saveState();
+      showView("results");
+      renderResults();
+    }
+  });
+
+  /* ---------------- results ---------------- */
+  function domainNote(avg){
+    if(avg == null) return "עוד לא סומן בתחום הזה.";
+    if(avg >= 4.4) return "חוזקה בולטת אצלך.";
+    if(avg >= 3.5) return "בסיס יציב וטוב.";
+    if(avg >= 2.5) return "בעבודה - יש עוד לאן לצמוח.";
+    return "כדאי להתמקד כאן קדימה.";
+  }
+
+  function renderResults(){
+    var answered = answeredCount();
+    var allVals = [];
+    for(var k in state.answers) allVals.push(state.answers[k]);
+    var overallAvg = allVals.length ? (allVals.reduce(function(a,b){return a+b;},0)/allVals.length) : null;
+
+    var domainAverages = DOMAINS.map(function(d){ return { d:d, avg:domainAvg(d) }; });
+    var ranked = domainAverages.filter(function(x){ return x.avg != null; })
+      .slice().sort(function(a,b){ return b.avg - a.avg; });
+
+    var statRow = document.getElementById("statRow");
+    statRow.innerHTML =
+      '<div class="stat"><b class="num">'+answered+'/'+TOTAL+'</b><span>פרקטיקות שסומנו</span></div>' +
+      '<div class="stat"><b class="num">'+(overallAvg!=null ? overallAvg.toFixed(1) : "-")+'</b><span>ציון ממוצע כללי מתוך 5</span></div>' +
+      '<div class="stat"><b>'+(ranked.length ? ranked[0].d.short : "-")+'</b><span style="display:block">התחום החזק ביותר</span></div>';
+
+    drawRadar(domainAverages);
+
+    var allPractices = [];
+    DOMAINS.forEach(function(d){
+      d.practices.forEach(function(p){
+        if(state.answers[p.id] != null){
+          allPractices.push({ text:p.t, score:state.answers[p.id], domain:d });
+        }
+      });
+    });
+
+    var strengths = allPractices.filter(function(p){ return p.score >= 4; })
+      .sort(function(a,b){ return b.score - a.score; }).slice(0,4);
+    var growth = allPractices.filter(function(p){ return p.score <= 2; })
+      .sort(function(a,b){ return a.score - b.score; }).slice(0,4);
+
+    var strengthList = document.getElementById("strengthList");
+    var growthList = document.getElementById("growthList");
+    strengthList.innerHTML = "";
+    growthList.innerHTML = "";
+
+    if(strengths.length){
+      strengths.forEach(function(p){
+        var li = el("li");
+        li.innerHTML = '<span class="dot" style="background:'+p.domain.color+'"></span><span>'+esc(p.text)+'</span>';
+        strengthList.appendChild(li);
+      });
+    } else {
+      strengthList.innerHTML = '<li>עוד לא הצטברו מספיק דירוגים גבוהים להצגה כאן.</li>';
+    }
+
+    if(growth.length){
+      growth.forEach(function(p){
+        var li = el("li");
+        li.innerHTML = '<span class="dot" style="background:'+p.domain.color+'"></span><span>'+esc(p.text)+'</span>';
+        growthList.appendChild(li);
+      });
+    } else {
+      growthList.innerHTML = '<li>לא סימנת פרקטיקות בדירוג נמוך - נראה מצוין.</li>';
+    }
+
+    var cardsWrap = document.getElementById("domainCards");
+    cardsWrap.innerHTML = "";
+    var sortedAll = domainAverages.slice().sort(function(a,b){
+      var av = a.avg == null ? -1 : a.avg, bv = b.avg == null ? -1 : b.avg;
+      return bv - av;
+    });
+    sortedAll.forEach(function(x){
+      var card = el("div","domain-card");
+      var pct = x.avg != null ? (x.avg/5*100) : 0;
+      card.innerHTML =
+        '<div class="domain-card-top">' +
+          '<span class="domain-card-name"><span class="dot" style="background:'+x.d.color+'"></span>'+esc(x.d.name)+'</span>' +
+          '<span class="domain-card-score num" dir="ltr">'+(x.avg!=null ? x.avg.toFixed(1)+"/5" : "—")+'</span>' +
+        '</div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%; background:'+x.d.color+'"></div></div>' +
+        '<div class="domain-card-note">'+domainNote(x.avg)+' ('+domainAnswered(x.d)+'/'+x.d.practices.length+' סומנו)</div>';
+      cardsWrap.appendChild(card);
+    });
+
+    updateTopProgress();
+  }
+
+  function polar(cx, cy, r, angleDeg){
+    var rad = (angleDeg - 90) * Math.PI / 180;
+    return [cx + r*Math.cos(rad), cy + r*Math.sin(rad)];
+  }
+
+  function drawRadar(domainAverages){
+    var svg = document.getElementById("radar");
+    var cx = 170, cy = 172, maxR = 108;
+    var n = domainAverages.length;
+    var ns = "http://www.w3.org/2000/svg";
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+    function make(tag, attrs){
+      var e = document.createElementNS(ns, tag);
+      for(var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    var gridColor = "var(--border)";
+    for(var ring=1; ring<=5; ring++){
+      var r = ring/5*maxR;
+      var pts = [];
+      for(var i=0;i<n;i++){
+        var p = polar(cx,cy,r,i*(360/n));
+        pts.push(p[0].toFixed(1)+","+p[1].toFixed(1));
+      }
+      svg.appendChild(make("polygon",{points:pts.join(" "), fill:"none", stroke:gridColor, "stroke-width": ring===5?1.4:1}));
+    }
+
+    for(i=0;i<n;i++){
+      var edge = polar(cx,cy,maxR,i*(360/n));
+      svg.appendChild(make("line",{x1:cx,y1:cy,x2:edge[0],y2:edge[1],stroke:gridColor,"stroke-width":1}));
+    }
+
+    var dataPts = [];
+    domainAverages.forEach(function(x,i){
+      var val = x.avg == null ? 0 : x.avg;
+      var p = polar(cx,cy,val/5*maxR,i*(360/n));
+      dataPts.push(p);
+    });
+    svg.appendChild(make("polygon",{
+      points:dataPts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" "),
+      fill:"rgba(0,72,255,0.16)", stroke:"#0048FF", "stroke-width":2.5, "stroke-linejoin":"round"
+    }));
+
+    domainAverages.forEach(function(x,i){
+      var val = x.avg == null ? 0 : x.avg;
+      var p = polar(cx,cy,val/5*maxR,i*(360/n));
+      svg.appendChild(make("circle",{cx:p[0],cy:p[1],r:5.5,fill: x.avg==null ? "var(--ink-soft,#8390B2)" : x.d.color, stroke:"#FEFEFE","stroke-width":1.5}));
+
+      var lp = polar(cx,cy,maxR+30,i*(360/n));
+      var text = make("text",{x:lp[0], y:lp[1], "text-anchor":"middle","dominant-baseline":"middle","font-size":11.5,"font-weight":700, fill:"var(--fg2,#4A5580)"});
+      var words = x.d.short.split(" ");
+      if(words.length > 1){
+        text.appendChild(make("tspan",{x:lp[0], dy:"-0.3em"})).textContent = words.slice(0, Math.ceil(words.length/2)).join(" ");
+        text.appendChild(make("tspan",{x:lp[0], dy:"1.15em"})).textContent = words.slice(Math.ceil(words.length/2)).join(" ");
+      } else {
+        text.textContent = x.d.short;
+      }
+      svg.appendChild(text);
+    });
+  }
+
+  document.getElementById("btnCopy").addEventListener("click", function(){
+    var lines = ["מראה למחנכת - סיכום אישי"];
+    DOMAINS.forEach(function(d){
+      var avg = domainAvg(d);
+      lines.push(d.name + ": " + (avg!=null ? avg.toFixed(1)+"/5" : "לא סומן"));
+    });
+    var text = lines.join("\n");
+    var btn = document.getElementById("btnCopy");
+    function done(ok){ btn.textContent = ok ? "הועתק ✓" : "אפשר לסמן ולהעתיק ידנית"; setTimeout(function(){ btn.textContent="העתקת סיכום"; },1800); }
+    try{
+      navigator.clipboard.writeText(text).then(function(){done(true);}, function(){done(false);});
+    }catch(e){ done(false); }
+  });
+
+  var restartArmed = false;
+  document.getElementById("btnRestart").addEventListener("click", function(){
+    if(!restartArmed){
+      restartArmed = true;
+      document.getElementById("restartHint").hidden = false;
+      document.getElementById("btnRestart").textContent = "לאישור - להתחיל מחדש";
+      return;
+    }
+    state = defaultState();
+    saveState();
+    restartArmed = false;
+    document.getElementById("restartHint").hidden = true;
+    document.getElementById("btnRestart").textContent = "התחלה מחדש";
+    showView("intro");
+    renderIntro();
+  });
+
+  /* ---------------- boot ---------------- */
+  function start(initial){
+    if(initial && initial.answers) state = initial;
+    if(state.stage === "results"){
+      showView("results"); renderResults();
+    } else if(state.stage === "assess" || state.stage === "assess-ready"){
+      showView("assess"); renderAssess();
+    } else {
+      showView("intro"); renderIntro();
+    }
+  }
+
+  if(window.claude && window.claude.hot && window.claude.hot.ready){
+    window.claude.hot.ready(function(data){ start(data && data.answers ? data : null); });
+  } else {
+    start(null);
+  }
+})();
+</script>
+</body>
+</html>
